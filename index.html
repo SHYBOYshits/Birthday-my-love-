@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>For You ❤️</title>
+
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        text-align: center;
+        padding: 50px;
+        background: #ffe6ef;
+        overflow: hidden;
+    }
+
+    /* Typewriter effect */
+    .typewriter {
+        display: inline-block;
+        overflow: hidden;
+        white-space: nowrap;
+        border-right: 3px solid #ff4d6d;
+        font-size: 28px;
+        animation: typing 3s steps(30), blink .6s infinite;
+    }
+
+    @keyframes typing {
+        from { width: 0; }
+        to { width: 100%; }
+    }
+    @keyframes blink {
+        50% { border-color: transparent; }
+    }
+
+    /* Buttons */
+    .btn {
+        margin: 10px;
+        padding: 15px 25px;
+        font-size: 20px;
+        border: none;
+        cursor: pointer;
+        border-radius: 10px;
+        background: #ff4d6d;
+        color: white;
+        animation: bounce 1.5s infinite;
+    }
+
+    @keyframes bounce {
+        0%, 100% { transform: translateY(0); }
+        50% { transform: translateY(-10px); }
+    }
+
+    /* Smooth fade screens */
+    .screen {
+        animation: fadeIn 1.2s ease forwards;
+        opacity: 0;
+    }
+    @keyframes fadeIn {
+        from { opacity: 0; transform: scale(0.98); }
+        to { opacity: 1; transform: scale(1); }
+    }
+
+    img {
+        width: 220px;
+        margin-top: 20px;
+        animation: popIn 1s ease forwards;
+        opacity: 0;
+    }
+
+    @keyframes popIn {
+        0% { opacity: 0; transform: scale(0.5); }
+        100% { opacity: 1; transform: scale(1); }
+    }
+
+    .hidden { display: none; }
+
+    /* Floating hearts animation */
+    .heart {
+        position: fixed;
+        bottom: -10px;
+        color: #ff4d6d;
+        font-size: 30px;
+        animation: floatUp 5s linear infinite;
+        opacity: 0.7;
+    }
+
+    @keyframes floatUp {
+        0% { transform: translateY(0) scale(1); opacity: 0.8; }
+        100% { transform: translateY(-600px) scale(1.5); opacity: 0; }
+    }
+</style>
+</head>
+<body>
+
+<!-- Background music -->
+<audio autoplay loop>
+  <source src="https://cdn.pixabay.com/audio/2022/03/15/audio_7c62704a3a.mp3" type="audio/mpeg">
+</audio>
+
+<!-- MAIN QUESTION -->
+<div id="question1" class="screen">
+    <h1 class="typewriter">Do you Love me? ❤️</h1><br><br>
+    <button class="btn" onclick="yes()">Yes</button>
+    <button class="btn" onclick="no()">No</button>
+</div>
+
+<!-- YES SCREEN -->
+<div id="yesScreen" class="hidden screen">
+    <h1 class="typewriter">Love you too! ❤️🥰</h1>
+    <h2>Happy Birthday My Love 💖</h2>
+    <img src="https://i.imgur.com/4AiXzf8.png" alt="teddy">
+</div>
+
+<!-- NO SCREEN -->
+<div id="noScreen" class="hidden screen">
+    <h1 class="typewriter">Why don't you love me? 😭</h1>
+    <h2>Do you love me? Say yes!</h2>
+    <button class="btn" onclick="yes()">Yes</button>
+    <button class="btn" onclick="yes()">Yes</button>
+</div>
+
+<script>
+function yes() {
+    showScreen("yesScreen");
+}
+function no() {
+    showScreen("noScreen");
+}
+
+function showScreen(screen) {
+    document.getElementById("question1").classList.add("hidden");
+    document.getElementById("yesScreen").classList.add("hidden");
+    document.getElementById("noScreen").classList.add("hidden");
+
+    document.getElementById(screen).classList.remove("hidden");
+}
+
+/* Floating hearts generator */
+setInterval(() => {
+    let heart = document.createElement("div");
+    heart.classList.add("heart");
+    heart.innerHTML = "❤️";
+    heart.style.left = Math.random() * window.innerWidth + "px";
+    heart.style.animationDuration = (3 + Math.random() * 3) + "s";
+    document.body.appendChild(heart);
+
+    setTimeout(() => { heart.remove(); }, 6000);
+}, 400);
+</script>
+
+</body>
+</html>
